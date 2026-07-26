@@ -1,10 +1,11 @@
 name: Hello World
 on: 
-  push:
-    branches: [Feature_CMDM1001]
+  pull_request:
+    types: [closed]
 
 jobs:
   create-tag:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -14,7 +15,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: push tag
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_DATE: ${{ github.event.pull_request.created_at }}
         run: |
-            TAG_VERSION="V1.0.${{github.run_number}}"
+            ONLY_NUMBERS=$(echo "$PR_TITLE" | tr -cd '0-9')
+            echo "R$ONLY_NUMBERS.0 $PR_DATE PROD Release"
+            TAG_VERSION="R$ONLY_NUMBERS.0 $PR_DATE PROD Release"
             git tag $TAG_VERSION
             git push origin $TAG_VERSION
