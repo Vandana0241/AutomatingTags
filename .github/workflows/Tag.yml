@@ -20,7 +20,7 @@ jobs:
           PR_DATE: ${{ github.event.pull_request.created_at }}
         run: |
             ONLY_NUMBERS=$(echo "$PR_TITLE" | tr -cd '0-9')
-            echo "R$ONLY_NUMBERS.0 $PR_DATE PROD Release"
+            # echo "R$ONLY_NUMBERS.0 $PR_DATE PROD Release"
             TAG_VERSION="R$ONLY_NUMBERS.0 $PR_DATE PROD Release"
             git tag $TAG_VERSION
             git push origin $TAG_VERSION
