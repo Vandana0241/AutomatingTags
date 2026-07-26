@@ -1,0 +1,20 @@
+name: Hello World
+on: 
+  push:
+    branches: [Feature_CMDM1001]
+
+jobs:
+  create-tag:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: push tag
+        run: |
+            TAG_VERSION="V1.0.${{github.run_number}}"
+            git tag $TAG_VERSION
+            git push origin $TAG_VERSION
