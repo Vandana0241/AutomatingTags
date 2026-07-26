@@ -15,6 +15,5 @@ jobs:
           PR_DATE: ${{ github.event.pull_request.created_at }}
           
         run: |
-          PR_YEAR= $(echo "$PR_DATE" | cut -c1-4)
           ONLY_NUMBERS=$(echo "$PR_TITLE" | tr -cd '0-9')
-          echo "R$ONLY_NUMBERS.0 $PR_YEAR PROD Release"
+          echo "R$ONLY_NUMBERS.0 $PR_DATE PROD Release"
