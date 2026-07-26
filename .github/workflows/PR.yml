@@ -1,0 +1,16 @@
+name: Tag from PR
+on: 
+  pull_request:
+    types: [closed]
+
+jobs:
+  tag_pr:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print Pull Request Title
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          echo "The merged PR title is: $PR_TITLE"
