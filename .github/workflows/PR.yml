@@ -12,9 +12,9 @@ jobs:
       - name: Print Pull Request Title
         env:
           PR_TITLE: ${{ github.event.pull_request.title }}
-          PR_DATE: "${{ github.event.pull_request.created_at }}"
+          # PR_DATE: "${{ github.event.pull_request.created_at }}"
           
         run: |
-          PR_YEAR= $(echo "$PR_DATE" | cut -d'-' -f1)
+          # PR_YEAR= $(echo "$PR_DATE" | cut -d'-' -f1)
           ONLY_NUMBERS=$(echo "$PR_TITLE" | tr -cd '0-9')
           echo "R$ONLY_NUMBERS.0 $PR_YEAR PROD Release"
