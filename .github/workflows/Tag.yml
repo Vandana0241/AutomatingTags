@@ -13,9 +13,19 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: push tag
         run: |
             TAG_VERSION="${{ github.event.pull_request.title }}"
             git tag $TAG_VERSION
             git push origin $TAG_VERSION
+      - name: Generate Release Notes and create release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event.pull_request.title }}
+          name: Release ${{ github.event.pull_request.title }}
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
