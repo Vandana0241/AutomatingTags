@@ -16,6 +16,6 @@ jobs:
 
       - name: push tag
         run: |
-            TAG_VERSION="R1.0.${{ github.event.pull_request.title }}"
+            TAG_VERSION="${{ github.event.pull_request.title }}"
             git tag $TAG_VERSION
             git push origin $TAG_VERSION
