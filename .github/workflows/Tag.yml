@@ -1,10 +1,11 @@
 name: Hello World
 on: 
-  push:
-    branches: [Feature_CMDM1001]
+  pull_request:
+    types: [closed]
 
 jobs:
   create-tag:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     permissions:
       contents: write
