@@ -19,6 +19,6 @@ jobs:
           PR_TITLE: ${{ github.event.pull_request.title }}
           PR_DATE: ${{ github.event.pull_request.created_at }}
         run: |
-            TAG_VERSION="R.0 $PR_DATE PROD Release"
+            TAG_VERSION= "R.0 PROD Release"
             git tag $TAG_VERSION
             git push origin $TAG_VERSION
